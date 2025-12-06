@@ -1,9 +1,9 @@
-baseURL = 'https://example.org/'
-languageCode = 'en-us'
-title = 'My Portfolio'
+baseURL = 'https://khelben.github.io/artware.be-hugo/'
+languageCode = 'nl-be'
+title = 'ARTware - Keramiek'
 
 [params]
-logo = '/images/logo.png'
+logo = './images/logo.png'
 
 
 [caches]
