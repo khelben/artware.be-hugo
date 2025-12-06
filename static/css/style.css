@@ -34,15 +34,15 @@ body {
 }
 
 .slide:nth-child(1) {
-    background-image: url('/images/slide1.jpg');
+    background-image: url('./images/slide1.jpg');
 }
 
 .slide:nth-child(2) {
-    background-image: url('/images/slide2.jpg');
+    background-image: url('./images/slide2.jpg');
 }
 
 .slide:nth-child(3) {
-    background-image: url('/images/slide3.jpg');
+    background-image: url('./images/slide3.jpg');
 }
 
 .slide.active {
