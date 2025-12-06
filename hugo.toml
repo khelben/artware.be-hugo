@@ -1,4 +1,4 @@
-baseURL = 'https://khelben.github.io/artware.be-hugo/'
+baseURL = 'https://artware.be/'
 languageCode = 'nl-be'
 title = 'ARTware - Keramiek'
 
