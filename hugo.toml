@@ -4,3 +4,8 @@ title = 'My Portfolio'
 
 [params]
 logo = '/images/logo.png'
+
+
+[caches]
+  [caches.images]
+    dir = ':cacheDir/images'
