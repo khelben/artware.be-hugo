@@ -1,6 +1,6 @@
 baseURL = 'https://artware.be/'
 languageCode = 'nl-be'
-title = 'ARTware - Keramiek'
+title = 'ARTware - Keramiek - Lieve De Schutter'
 
 [params]
 logo = './images/logo.png'
