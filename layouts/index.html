@@ -6,19 +6,16 @@
     <title>{{ .Site.Title }}</title>
     <link rel="icon" type="image/png" href="{{ "images/favicon.png" | relURL }}">
     <link rel="apple-touch-icon" href="{{ "images/favicon.png" | relURL }}">
+    <link rel="stylesheet" href="https://unpkg.com/photoswipe@5/dist/photoswipe.css">
     <link rel="stylesheet" href="{{ "css/style.css" | relURL }}">
 </head>
 <body>
-    <div class="slideshow">
-        {{/*  <div class="slide"></div>
-        <div class="slide"></div>
-        <div class="slide"></div>  */}}
-    </div>
-    
-    <div class="logo-container">
+    <header class="site-header">
         <img src="{{ .Site.Params.logo | relURL }}" alt="{{ .Site.Title }}" class="logo">
-    </div>
+    </header>
 
-    <script src="{{ "js/main.js" | relURL }}"></script>
+    <div class="pswp-gallery" id="gallery"></div>
+
+    <script type="module" src="{{ "js/main.js" | relURL }}"></script>
 </body>
 </html>
