@@ -5,6 +5,8 @@ title = 'ARTware - Keramiek - Lieve De Schutter'
 [params]
 logo = './images/logo.png'
 
+[taxonomies]
+
 
 [caches]
   [caches.images]
