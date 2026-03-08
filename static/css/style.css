@@ -103,25 +103,37 @@ h1, h2, h3, h4 { font-family: 'Playfair Display', serif; font-weight: 400; }
 /* ── About strip ── */
 .about-strip { background: var(--sand); }
 
-/* ── Gallery ── */
-.gallery-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+/* ── Gallery carousel ── */
+.gallery-carousel {
+    display: flex;
     gap: 6px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    scrollbar-color: var(--sand) transparent;
+    padding-bottom: 8px;
 }
-.gallery-grid a {
+.gallery-carousel::-webkit-scrollbar { height: 4px; }
+.gallery-carousel::-webkit-scrollbar-track { background: transparent; }
+.gallery-carousel::-webkit-scrollbar-thumb { background: var(--sand); border-radius: 2px; }
+
+.gallery-carousel a {
+    flex: 0 0 auto;
     display: block;
+    height: 23vh;
     overflow: hidden;
-    aspect-ratio: 1;
     cursor: zoom-in;
+    scroll-snap-align: start;
 }
-.gallery-grid img {
-    width: 100%;
+.gallery-carousel img {
     height: 100%;
+    width: auto;
     object-fit: cover;
+    display: block;
     transition: transform .4s ease;
 }
-.gallery-grid a:hover img { transform: scale(1.05); }
+.gallery-carousel a:hover img { transform: scale(1.03); }
 
 /* ── Footer ── */
 .site-footer {
