@@ -15,18 +15,14 @@
     </header>
 
     <div class="pswp-gallery" id="gallery">
-        {{ range seq 1 73 }}
-            {{ $path := printf "images/slide%d.jpg" . }}
-            {{ $img := resources.Get $path }}
-            {{ if $img }}
-                {{ $thumb := $img.Resize "400x" }}
-                <a href="{{ $img.RelPermalink }}"
-                   data-pswp-width="{{ $img.Width }}"
-                   data-pswp-height="{{ $img.Height }}"
-                   target="_blank">
-                    <img src="{{ $thumb.RelPermalink }}" alt="" loading="lazy">
-                </a>
-            {{ end }}
+        {{ range resources.Match "images/slide*.jpg" }}
+            {{ $thumb := .Resize "400x" }}
+            <a href="{{ .RelPermalink }}"
+               data-pswp-width="{{ .Width }}"
+               data-pswp-height="{{ .Height }}"
+               target="_blank">
+                <img src="{{ $thumb.RelPermalink }}" alt="" loading="lazy">
+            </a>
         {{ end }}
     </div>
 

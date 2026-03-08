@@ -27,7 +27,7 @@ next=$((next + 1))
 count=0
 files=()
 while IFS= read -r -d '' file; do
-    dest="$OUTPUT_DIR/slide${next}.jpg"
+    dest="$OUTPUT_DIR/$(printf 'slide%04d.jpg' $next)"
     mv "$file" "$dest"
     files+=("$dest")
     echo "  $(basename "$file") → slide${next}.jpg"
