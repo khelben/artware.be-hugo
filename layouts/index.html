@@ -15,7 +15,7 @@
     </header>
 
     <div class="pswp-gallery" id="gallery">
-        {{ range seq 1 75 }}
+        {{ range seq 1 73 }}
             {{ $path := printf "images/slide%d.jpg" . }}
             {{ $img := resources.Get $path }}
             {{ if $img }}
