@@ -15,7 +15,7 @@
     </header>
 
     <div class="pswp-gallery" id="gallery">
-        {{ range resources.Match "images/slide*.jpg" }}
+        {{ range resources.Match "images/gallery/slide*.jpg" }}
             {{ $thumb := .Resize "400x" }}
             <a href="{{ .RelPermalink }}"
                data-pswp-width="{{ .Width }}"

@@ -3,7 +3,7 @@ set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 INPUT_DIR="$SCRIPT_DIR/input"
-OUTPUT_DIR="$SCRIPT_DIR/assets/images"
+OUTPUT_DIR="$SCRIPT_DIR/assets/images/gallery"
 LOGO="$SCRIPT_DIR/static/images/logo.png"
 VENV="/tmp/imgvenv"
 
