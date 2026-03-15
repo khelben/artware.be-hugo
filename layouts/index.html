@@ -96,10 +96,26 @@
             <div class="text-center mb-5">
                 <p class="section-eyebrow">{{ i18n "gallery_eyebrow" }}</p>
                 <div class="clay-divider"></div>
-                <h2 class="section-title">{{ i18n "gallery_title" }}</h2>
+                <h2 class="section-title">{{ i18n "gallery_title_witte_klei" }}</h2>
             </div>
             <div class="pswp-gallery gallery-carousel" id="gallery-grid">
-                {{ range resources.Match "images/gallery/slide*.jpg" }}
+                {{ range resources.Match "images/gallery/witteklei/slide*.jpg" }}
+                    {{ $thumb := .Resize "400x" }}
+                    <a href="{{ .RelPermalink }}"
+                       data-pswp-width="{{ .Width }}"
+                       data-pswp-height="{{ .Height }}"
+                       target="_blank">
+                        <img src="{{ $thumb.RelPermalink }}" alt="" loading="lazy">
+                    </a>
+                {{ end }}
+            </div>
+        </div>
+        <div class="container-fluid px-0">
+            <div class="text-center mb-5">
+                <h2 class="section-title">{{ i18n "gallery_title_grijze_klei" }}</h2>
+            </div>
+            <div class="pswp-gallery gallery-carousel" id="gallery-grid-gray">
+                {{ range resources.Match "images/gallery/grijzeklei/slide*.jpg" }}
                     {{ $thumb := .Resize "400x" }}
                     <a href="{{ .RelPermalink }}"
                        data-pswp-width="{{ .Width }}"
@@ -119,7 +135,7 @@
             <img src="{{ .RelPermalink }}" alt="{{ $.Site.Title }}" height="66" class="mb-4">
             {{ end }}
             <p class="mb-1">{{ i18n "footer_tagline" | safeHTML }}</p>
-            <p class="small mb-0">&copy; {{ now.Year }} ARTware &middot; artware.be</p>
+            <p class="small mb-0">&copy; {{ now.Year }} ARTware &middot; artware.be &middot; <a href="mailto:info@artware.be">info@artware.be</a></p>
         </div>
     </footer>
 
