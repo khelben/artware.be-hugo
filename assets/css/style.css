@@ -19,9 +19,27 @@ h1, h2, h3, h4 { font-family: 'Playfair Display', serif; font-weight: 400; }
     border-bottom: 1px solid var(--sand);
 }
 .site-nav .navbar-brand img { height: 52px; }
+.site-nav .nav-link {
+    font-size: .8rem;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--dark);
+    padding: .4rem .6rem;
+}
+.site-nav .nav-link:hover { color: var(--clay); }
+.site-nav .navbar-toggler {
+    border-color: var(--sand);
+    padding: .3rem .5rem;
+}
+.site-nav .navbar-toggler:focus { box-shadow: none; }
+.site-nav .navbar-collapse { padding-top: .5rem; }
+@media (max-width: 767px) {
+    .site-nav .navbar-nav { padding-bottom: .5rem; }
+    .site-nav .nav-link { padding: .6rem 0; border-bottom: 1px solid var(--sand); }
+    .site-nav .nav-item:last-child .nav-link { border-bottom: none; }
+}
 
-.lang-switcher { font-size: .75rem; letter-spacing: .1em; text-transform: uppercase; }
-.lang-link { color: var(--clay); text-decoration: none; }
+.lang-link { color: var(--clay); }
 .lang-link:hover { color: var(--dark); }
 
 /* ── Hero ── */

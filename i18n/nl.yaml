@@ -1,4 +1,6 @@
-nav_collection: "Collectie"
+nav_about: "Over"
+nav_process: "Proces"
+nav_collection: "Portfolio"
 
 hero_eyebrow: "Handgemaakte keramiek"
 hero_title: "met de hand gemaakt<br />uit het hart"
@@ -17,7 +19,7 @@ process_title: "Van klei tot kunstwerk"
 process_desc: "Elk stuk wordt met liefde gedraaid, afgedraaid, gedroogd, geglazuurd en gebakken in de oven."
 
 gallery_eyebrow: "Portfolio"
-gallery_title_witte_klei: "Collectie witte klei"
-gallery_title_grijze_klei: "Collectie grijze klei"
+gallery_title_witte_klei: "Witte klei"
+gallery_title_grijze_klei: "Grijze klei"
 
 footer_tagline: "Handgemaakte keramiek &mdash; Lieve De Schutter"
