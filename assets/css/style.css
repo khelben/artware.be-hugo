@@ -105,6 +105,10 @@ h1, h2, h3, h4 { font-family: 'Playfair Display', serif; font-weight: 400; }
 .process-strip { background: var(--cream); }
 
 /* ── Gallery carousel ── */
+#process-grid {
+    justify-content: safe center;
+}
+
 .gallery-carousel {
     display: flex;
     gap: 6px;
