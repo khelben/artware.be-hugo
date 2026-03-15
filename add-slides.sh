@@ -13,10 +13,11 @@ if [ ! -d "$INPUT_DIR" ]; then
 fi
 
 # Ensure Pillow is available
-if [ ! -x "$VENV/bin/python3" ]; then
+if ! "$VENV/bin/python3" -c "from PIL import Image" 2>/dev/null; then
     echo "Setting up Python venv for watermarking..."
+    rm -rf "$VENV"
     python3 -m venv "$VENV"
-    "$VENV/bin/pip" install pillow -q
+    "$VENV/bin/pip" install --upgrade pillow -q
 fi
 
 total=0
@@ -59,17 +60,21 @@ fi
 
 # Apply watermark to all newly added images
 echo "Applying watermark..."
-printf '%s\n' "${all_files[@]}" | "$VENV/bin/python3" - "$LOGO" << 'PYEOF'
+tmp_filelist=$(mktemp /tmp/slides_files.XXXXXX)
+tmp_script=$(mktemp /tmp/slides_watermark.XXXXXX.py)
+printf '%s\n' "${all_files[@]}" > "$tmp_filelist"
+
+cat > "$tmp_script" << 'PYEOF'
 import sys
 from PIL import Image
 
-logo_path = sys.argv[1]
+logo_path, filelist_path = sys.argv[1], sys.argv[2]
 PADDING = 20
 LOGO_WIDTH_RATIO = 0.15
 
 logo_src = Image.open(logo_path).convert("RGBA")
 
-for path in sys.stdin.read().splitlines():
+for path in open(filelist_path).read().splitlines():
     img = Image.open(path).convert("RGBA")
     w, h = img.size
     logo_w = max(60, int(w * LOGO_WIDTH_RATIO))
@@ -80,5 +85,8 @@ for path in sys.stdin.read().splitlines():
     Image.alpha_composite(img, overlay).convert("RGB").save(path, "JPEG", quality=92)
     print(f"  watermarked {path.split('/')[-1]}")
 PYEOF
+
+"$VENV/bin/python3" "$tmp_script" "$LOGO" "$tmp_filelist"
+rm -f "$tmp_filelist" "$tmp_script"
 
 echo "Done. Added $total image(s)."
