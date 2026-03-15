@@ -3,8 +3,8 @@ set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 INPUT_DIR="$SCRIPT_DIR/input"
-OUTPUT_DIR="$SCRIPT_DIR/assets/images/gallery"
-LOGO="$SCRIPT_DIR/static/images/logo.png"
+GALLERY_DIR="$SCRIPT_DIR/assets/images/gallery"
+LOGO="$SCRIPT_DIR/assets/images/logo.png"
 VENV="/tmp/imgvenv"
 
 if [ ! -d "$INPUT_DIR" ]; then
@@ -19,30 +19,47 @@ if [ ! -x "$VENV/bin/python3" ]; then
     "$VENV/bin/pip" install pillow -q
 fi
 
-# Find the next available slide number
-last=$(ls "$OUTPUT_DIR"/slide*.jpg 2>/dev/null | grep -oE '[0-9]+' | sort -n | tail -1)
-next=${last:-0}
-next=$((next + 1))
+total=0
+all_files=()
 
-count=0
-files=()
-while IFS= read -r -d '' file; do
-    dest="$OUTPUT_DIR/$(printf 'slide%04d.jpg' $next)"
-    mv "$file" "$dest"
-    files+=("$dest")
-    echo "  $(basename "$file") → slide${next}.jpg"
+# Process each subdirectory in input/ (e.g. input/witteklei/, input/grijzeklei/)
+for subdir in "$INPUT_DIR"/*/; do
+    [ -d "$subdir" ] || continue
+    name="$(basename "$subdir")"
+    out="$GALLERY_DIR/$name"
+    mkdir -p "$out"
+
+    last=$(ls "$out"/slide*.jpg 2>/dev/null | grep -oE '[0-9]+' | sort -n | tail -1)
+    next=${last:-0}
     next=$((next + 1))
-    count=$((count + 1))
-done < <(find "$INPUT_DIR" -maxdepth 1 -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" \) -print0 | sort -z)
 
-if [ $count -eq 0 ]; then
-    echo "No image files found in '$INPUT_DIR'."
+    count=0
+    files=()
+    while IFS= read -r -d '' file; do
+        dest="$out/$(printf 'slide%04d.jpg' $next)"
+        mv "$file" "$dest"
+        files+=("$dest")
+        echo "  [$name] $(basename "$file") → slide$(printf '%04d' $next).jpg"
+        next=$((next + 1))
+        count=$((count + 1))
+    done < <(find "$subdir" -maxdepth 1 -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" \) -print0 | sort -z)
+
+    if [ $count -gt 0 ]; then
+        all_files+=("${files[@]}")
+        total=$((total + count))
+    else
+        echo "  [$name] No image files found."
+    fi
+done
+
+if [ $total -eq 0 ]; then
+    echo "No image files found in any subdirectory of '$INPUT_DIR'."
     exit 0
 fi
 
-# Apply watermark to newly added images
+# Apply watermark to all newly added images
 echo "Applying watermark..."
-printf '%s\n' "${files[@]}" | "$VENV/bin/python3" - "$LOGO" << 'PYEOF'
+printf '%s\n' "${all_files[@]}" | "$VENV/bin/python3" - "$LOGO" << 'PYEOF'
 import sys
 from PIL import Image
 
@@ -64,4 +81,4 @@ for path in sys.stdin.read().splitlines():
     print(f"  watermarked {path.split('/')[-1]}")
 PYEOF
 
-echo "Done. Added $count image(s)."
+echo "Done. Added $total image(s)."

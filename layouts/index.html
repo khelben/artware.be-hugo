@@ -86,7 +86,7 @@
                 <p class="mx-auto text-muted" style="max-width:560px; line-height:1.8;">{{ i18n "process_desc" }}</p>
             </div>
             <div class="pswp-gallery gallery-carousel" id="process-grid">
-                {{ range resources.Match "images/process/process*.jpg" }}
+                {{ range resources.Match "images/gallery/process/slide*.jpg" }}
                     {{ $thumb := .Resize "400x" }}
                     <a href="{{ .RelPermalink }}"
                        data-pswp-width="{{ .Width }}"
