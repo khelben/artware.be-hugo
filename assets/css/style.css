@@ -101,7 +101,8 @@ h1, h2, h3, h4 { font-family: 'Playfair Display', serif; font-weight: 400; }
 }
 
 /* ── About strip ── */
-.about-strip { background: var(--sand); }
+.about-strip, .gallery-strip { background: var(--sand); }
+.process-strip { background: var(--cream); }
 
 /* ── Gallery carousel ── */
 .gallery-carousel {

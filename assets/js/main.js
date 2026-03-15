@@ -6,4 +6,11 @@ const lightbox = new PhotoSwipeLightbox({
     pswpModule: () => import('https://unpkg.com/photoswipe@5/dist/photoswipe.esm.js'),
 });
 
+const processLightbox = new PhotoSwipeLightbox({
+    gallery: '#process-grid',
+    children: 'a',
+    pswpModule: () => import('https://unpkg.com/photoswipe@5/dist/photoswipe.esm.js'),
+});
+
 lightbox.init();
+processLightbox.init();
