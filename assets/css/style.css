@@ -22,7 +22,9 @@ h1, h2, h3, h4 { font-family: 'Playfair Display', serif; font-weight: 400; }
 
 /* ── Hero ── */
 .hero {
-    position: relative;
+    position: sticky;
+    top: 0;
+    z-index: 0;
     height: 92vh;
     overflow: hidden;
 }
@@ -100,7 +102,11 @@ h1, h2, h3, h4 { font-family: 'Playfair Display', serif; font-weight: 400; }
     margin: 1rem auto;
 }
 
-/* ── About strip ── */
+/* ── Sections (must stack above sticky hero) ── */
+.about-strip, .process-strip, .gallery-strip, .site-footer {
+    position: relative;
+    z-index: 1;
+}
 .about-strip, .gallery-strip { background: var(--sand); }
 .process-strip { background: var(--cream); }
 
