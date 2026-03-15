@@ -1,6 +1,19 @@
 baseURL = 'https://artware.be/'
-languageCode = 'nl-be'
+defaultContentLanguage = 'nl'
+defaultContentLanguageInSubdir = false
 title = 'ARTware - Keramiek - Lieve De Schutter'
+
+[languages]
+  [languages.nl]
+    languageCode = 'nl-be'
+    languageName = 'Nederlands'
+    title = 'ARTware - Keramiek - Lieve De Schutter'
+    weight = 1
+  [languages.en]
+    languageCode = 'en'
+    languageName = 'English'
+    title = 'ARTware - Ceramics - Lieve De Schutter'
+    weight = 2
 
 [params]
 

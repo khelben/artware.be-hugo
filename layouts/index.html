@@ -22,12 +22,19 @@
     <!-- ── Navbar ── -->
     <nav class="site-nav navbar sticky-top py-3">
         <div class="container">
-            <a class="navbar-brand" href="/">
+            <a class="navbar-brand" href="{{ .Site.Home.RelPermalink }}">
                 {{ with resources.Get "images/logo.png" }}
                 <img src="{{ .RelPermalink }}" alt="{{ $.Site.Title }}">
                 {{ end }}
             </a>
-            <a href="#gallery" class="btn btn-outline-clay d-none d-md-inline-block">Collectie</a>
+            <div class="d-flex align-items-center gap-3">
+                <a href="#gallery" class="btn btn-outline-clay d-none d-md-inline-block">{{ i18n "nav_collection" }}</a>
+                <div class="lang-switcher">
+                    {{ range .Translations }}
+                    <a href="{{ .RelPermalink }}" class="lang-link">{{ .Language.LanguageName }}</a>
+                    {{ end }}
+                </div>
+            </div>
         </div>
     </nav>
 
@@ -35,12 +42,12 @@
     {{ $hero := resources.Get "images/hero.jpg" }}
     {{ if $hero }}
     <section class="hero">
-        <img src="{{ $hero.RelPermalink }}" alt="Keramiek door Lieve De Schutter">
+        <img src="{{ $hero.RelPermalink }}" alt="{{ i18n "hero_alt" }}">
         <div class="hero-overlay">
             <div class="px-3">
-                <p class="hero-eyebrow mb-3">Handgemaakte keramiek</p>
-                <h1 class="hero-title mb-4">met de hand gemaakt<br />uit het hart</em></h1>
-                <a href="#gallery" class="btn btn-clay">Bekijk de collectie</a>
+                <p class="hero-eyebrow mb-3">{{ i18n "hero_eyebrow" }}</p>
+                <h1 class="hero-title mb-4">{{ i18n "hero_title" | safeHTML }}</h1>
+                <a href="#gallery" class="btn btn-clay">{{ i18n "hero_cta" }}</a>
             </div>
         </div>
     </section>
@@ -49,45 +56,25 @@
     <!-- ── About strip ── -->
     <section class="about-strip py-5">
         <div class="container text-center">
-            <p class="section-eyebrow">Over de kunstenaar</p>
+            <p class="section-eyebrow">{{ i18n "about_eyebrow" }}</p>
             <div class="clay-divider"></div>
             <h2 class="section-title mb-3">Lieve De Schutter</h2>
-            <p class="mx-auto text-muted" style="max-width:560px; line-height:1.8;">
-                Elk stuk wordt met de hand gevormd en weerspiegelt de schoonheid
-                van organische vormen en natuurlijke materialen. Keramiek als
-                ambacht én als kunst.
-            </p>
-            <p class="mx-auto text-muted" style="max-width:560px; line-height:1.8;">
-                Welkom bij <b>Artware De Schutter.</b>
-            </p>
-            <p class="mx-auto text-muted" style="max-width:560px; line-height:1.8;">
-                Met <b>Artware De Schutter</b> geeft <b>Lieve De Schutter</b> een nieuw, creatief vervolg aan een vertrouwd familieverhaal. 
-                <br>Haar grootouders legden ooit de basis met <b>Hardware De Schutter</b>, een winkel waar in het verleden servies en huishoudelijke spullen 
-                te vinden waren voor wie hield van kwaliteit en een mooie tafel.
-            </p>
-            <p class="mx-auto text-muted" style="max-width:560px; line-height:1.8;">
-                Vandaag vertaalt Lieve diezelfde liefde naar het pottenbakkersatelier. 
-                Aan de draaischijf ontstaan borden, kommen en schalen die niet alleen praktisch zijn, 
-                maar ook warmte en karakter brengen aan elke tafel.
-            </p>
-            <p class="mx-auto text-muted" style="max-width:560px; line-height:1.8;">
-                <b>Artware De Schutter</b> is zo meer dan keramiek alleen. Het is een kleine knipoog naar het verleden, 
-                een ode aan de grootouders die het fundament legden, en een familieverhaal dat verder leeft — 
-                van winkel naar atelier, van servies naar handgemaakt aardewerk. 
-            </p>
+            <p class="mx-auto text-muted" style="max-width:560px; line-height:1.8;">{{ i18n "about_p1" | safeHTML }}</p>
+            <p class="mx-auto text-muted" style="max-width:560px; line-height:1.8;">{{ i18n "about_welcome" | safeHTML }}</p>
+            <p class="mx-auto text-muted" style="max-width:560px; line-height:1.8;">{{ i18n "about_p2" | safeHTML }}</p>
+            <p class="mx-auto text-muted" style="max-width:560px; line-height:1.8;">{{ i18n "about_p3" | safeHTML }}</p>
+            <p class="mx-auto text-muted" style="max-width:560px; line-height:1.8;">{{ i18n "about_p4" | safeHTML }}</p>
         </div>
     </section>
 
-    <!-- ── from clay to endproduct ── -->
+    <!-- ── Process ── -->
     <section class="process-strip py-5">
         <div class="container-fluid px-0">
             <div class="text-center mb-5">
-                <p class="section-eyebrow">Het proces</p>
+                <p class="section-eyebrow">{{ i18n "process_eyebrow" }}</p>
                 <div class="clay-divider"></div>
-                <h2 class="section-title mb-3">Van klei tot kunstwerk</h2>
-                <p class="mx-auto text-muted" style="max-width:560px; line-height:1.8;">
-                    Elk stuk wordt met liefde gedraaid, afgedraaid, gedroogd en gebakken in de oven.
-                </p>
+                <h2 class="section-title mb-3">{{ i18n "process_title" }}</h2>
+                <p class="mx-auto text-muted" style="max-width:560px; line-height:1.8;">{{ i18n "process_desc" }}</p>
             </div>
             <div class="pswp-gallery gallery-carousel" id="process-grid">
                 {{ range resources.Match "images/process/process*.jpg" }}
@@ -103,16 +90,14 @@
         </div>
     </section>
 
-
     <!-- ── Gallery ── -->
     <section id="gallery" class="gallery-strip py-5">
         <div class="container-fluid px-0">
             <div class="text-center mb-5">
-                <p class="section-eyebrow">Portfolio</p>
+                <p class="section-eyebrow">{{ i18n "gallery_eyebrow" }}</p>
                 <div class="clay-divider"></div>
-                <h2 class="section-title">Collectie</h2>
+                <h2 class="section-title">{{ i18n "gallery_title" }}</h2>
             </div>
-
             <div class="pswp-gallery gallery-carousel" id="gallery-grid">
                 {{ range resources.Match "images/gallery/slide*.jpg" }}
                     {{ $thumb := .Resize "400x" }}
@@ -133,7 +118,7 @@
             {{ with resources.Get "images/logo-white.png" }}
             <img src="{{ .RelPermalink }}" alt="{{ $.Site.Title }}" height="66" class="mb-4">
             {{ end }}
-            <p class="mb-1">Handgemaakte keramiek &mdash; Lieve De Schutter</p>
+            <p class="mb-1">{{ i18n "footer_tagline" | safeHTML }}</p>
             <p class="small mb-0">&copy; {{ now.Year }} ARTware &middot; artware.be</p>
         </div>
     </footer>
