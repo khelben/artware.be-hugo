@@ -31,8 +31,7 @@ for subdir in "$INPUT_DIR"/*/; do
     mkdir -p "$out"
 
     last=$(ls "$out"/slide*.jpg 2>/dev/null | grep -oE '[0-9]+' | sort -n | tail -1)
-    next=${last:-0}
-    next=$((next + 1))
+    next=$((10#${last:-0} + 1))
 
     count=0
     files=()
@@ -41,7 +40,7 @@ for subdir in "$INPUT_DIR"/*/; do
         mv "$file" "$dest"
         files+=("$dest")
         echo "  [$name] $(basename "$file") → slide$(printf '%04d' $next).jpg"
-        next=$((next + 1))
+        next=$((10#$next + 1))
         count=$((count + 1))
     done < <(find "$subdir" -maxdepth 1 -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" \) -print0 | sort -z)
 
