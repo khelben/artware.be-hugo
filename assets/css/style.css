@@ -129,6 +129,10 @@ h1, h2, h3, h4 { font-family: 'Playfair Display', serif; font-weight: 400; }
     position: relative;
     z-index: 1;
 }
+
+#about, #process, #gallery {
+    scroll-margin-top: 80px;
+}
 .about-strip, .gallery-strip { background: var(--sand); }
 .process-strip { background: var(--cream); }
 
