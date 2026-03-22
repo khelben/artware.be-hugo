@@ -172,6 +172,36 @@ h1, h2, h3, h4 { font-family: 'Playfair Display', serif; font-weight: 400; }
 }
 .gallery-carousel a:hover img { transform: scale(1.03); }
 
+/* ── Cookie banner ── */
+#cookie-banner {
+    position: fixed;
+    bottom: 1.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1050;
+    background: var(--dark);
+    color: rgba(255,255,255,.85);
+    padding: 1rem 1.5rem;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    max-width: 90vw;
+    box-shadow: 0 4px 20px rgba(0,0,0,.3);
+    flex-wrap: wrap;
+}
+#cookie-banner[hidden] { display: none !important; }
+.cookie-text { margin: 0; font-size: .85rem; }
+.cookie-actions { display: flex; gap: .75rem; flex-shrink: 0; }
+#cookie-decline {
+    background: transparent;
+    color: rgba(255,255,255,.5);
+    border: none;
+    font-size: .8rem;
+    padding: .4rem .8rem;
+}
+#cookie-decline:hover { color: #fff; }
+
 /* ── Footer ── */
 .site-footer {
     background: var(--dark);

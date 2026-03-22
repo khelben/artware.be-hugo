@@ -148,6 +148,20 @@
         </div>
     </footer>
 
+    <!-- ── Cookie banner ── -->
+    <div id="cookie-banner" hidden>
+        <p class="cookie-text">{{ i18n "cookie_text" | safeHTML }}</p>
+        <div class="cookie-actions">
+            <button id="cookie-accept" class="btn btn-clay btn-sm">{{ i18n "cookie_accept" }}</button>
+            <button id="cookie-decline" class="btn btn-sm">{{ i18n "cookie_decline" }}</button>
+        </div>
+    </div>
+
+    {{ if .Site.Params.gaID }}
+    <script>
+        window.GA_ID = {{ .Site.Params.gaID | jsonify }};
+    </script>
+    {{ end }}
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     {{ with resources.Get "js/main.js" | fingerprint }}
     <script type="module" src="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous"></script>
