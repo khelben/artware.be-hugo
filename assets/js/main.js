@@ -31,22 +31,32 @@ function loadGA() {
 }
 
 const CONSENT_KEY = 'cookie_consent';
+const CONSENT_DATE_KEY = 'cookie_consent_date';
+const CONSENT_TTL = 30 * 24 * 60 * 60 * 1000; // 30 days in ms
 const banner = document.getElementById('cookie-banner');
 
-if (localStorage.getItem(CONSENT_KEY) === 'accepted') {
-    loadGA();
-} else if (localStorage.getItem(CONSENT_KEY) !== 'declined') {
+const consent = localStorage.getItem(CONSENT_KEY);
+const consentDate = parseInt(localStorage.getItem(CONSENT_DATE_KEY) || '0');
+const expired = Date.now() - consentDate > CONSENT_TTL;
+
+if (consent && !expired) {
+    if (consent === 'accepted') loadGA();
+} else {
+    localStorage.removeItem(CONSENT_KEY);
+    localStorage.removeItem(CONSENT_DATE_KEY);
     banner.hidden = false;
 }
 
 document.getElementById('cookie-accept')?.addEventListener('click', () => {
     localStorage.setItem(CONSENT_KEY, 'accepted');
+    localStorage.setItem(CONSENT_DATE_KEY, Date.now());
     banner.hidden = true;
     loadGA();
 });
 
 document.getElementById('cookie-decline')?.addEventListener('click', () => {
     localStorage.setItem(CONSENT_KEY, 'declined');
+    localStorage.setItem(CONSENT_DATE_KEY, Date.now());
     banner.hidden = true;
 });
 
