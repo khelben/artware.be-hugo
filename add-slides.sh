@@ -6,6 +6,16 @@ INPUT_DIR="$SCRIPT_DIR/input"
 GALLERY_DIR="$SCRIPT_DIR/assets/images/gallery"
 LOGO="$SCRIPT_DIR/assets/images/logo.png"
 VENV="/tmp/imgvenv"
+# Compute SHA256 hash of a file (cross-platform: macOS + Linux)
+sha256_of() {
+    if command -v sha256sum &>/dev/null; then
+        sha256sum "$1" | cut -d' ' -f1
+    else
+        shasum -a 256 "$1" | cut -d' ' -f1
+    fi
+}
+
+mkdir -p "$GALLERY_DIR"
 
 if [ ! -d "$INPUT_DIR" ]; then
     echo "Error: '$INPUT_DIR' folder not found." >&2
@@ -29,6 +39,8 @@ for subdir in "$INPUT_DIR"/*/; do
     name="$(basename "$subdir")"
     out="$GALLERY_DIR/$name"
     mkdir -p "$out"
+    HASH_FILE="$out/.imported_hashes"
+    touch "$HASH_FILE"
 
     last=$(ls "$out"/slide*.jpg 2>/dev/null | grep -oE '[0-9]+' | sort -n | tail -1)
     next=$((10#${last:-0} + 1))
@@ -36,8 +48,14 @@ for subdir in "$INPUT_DIR"/*/; do
     count=0
     files=()
     while IFS= read -r -d '' file; do
+        hash=$(sha256_of "$file")
+        if grep -qF "$hash" "$HASH_FILE" 2>/dev/null; then
+            echo "  [$name] $(basename "$file") already imported — skipping"
+            continue
+        fi
         dest="$out/$(printf 'slide%04d.jpg' $next)"
         mv "$file" "$dest"
+        echo "$hash" >> "$HASH_FILE"
         files+=("$dest")
         echo "  [$name] $(basename "$file") → slide$(printf '%04d' $next).jpg"
         next=$((10#$next + 1))
