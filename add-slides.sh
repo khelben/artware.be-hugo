@@ -42,7 +42,7 @@ for subdir in "$INPUT_DIR"/*/; do
     HASH_FILE="$out/.imported_hashes"
     touch "$HASH_FILE"
 
-    last=$(ls "$out"/slide*.jpg 2>/dev/null | grep -oE '[0-9]+' | sort -n | tail -1)
+    last=$(find "$out" -maxdepth 1 -name "slide*.jpg" 2>/dev/null | grep -oE '[0-9]+' | sort -n | tail -1 || true)
     next=$((10#${last:-0} + 1))
 
     count=0
