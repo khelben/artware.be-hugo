@@ -62,6 +62,6 @@ document.getElementById('cookie-decline')?.addEventListener('click', () => {
 
 const pswpModule = () => import('https://unpkg.com/photoswipe@5/dist/photoswipe.esm.js');
 
-['#gallery-grid', '#gallery-grid-gray', '#process-grid']
+['#gallery-grid', '#gallery-grid-gray', '#gallery-grid-black', '#process-grid']
     .filter(id => document.querySelector(id))
     .forEach(id => new PhotoSwipeLightbox({ gallery: id, children: 'a', pswpModule }).init());
