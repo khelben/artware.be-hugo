@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ .Site.LanguageCode }}">
+<html lang="{{ .Site.Language.Locale }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -39,7 +39,7 @@
                     <li class="nav-item"><a class="nav-link" href="#gallery">{{ i18n "nav_collection" }}</a></li>
                     {{ range .Translations }}
                     <li class="nav-item">
-                        <a href="{{ .RelPermalink }}" class="lang-link nav-link">{{ .Language.LanguageName }}</a>
+                        <a href="{{ .RelPermalink }}" class="lang-link nav-link">{{ .Language.Label }}</a>
                     </li>
                     {{ end }}
                 </ul>

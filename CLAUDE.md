@@ -8,7 +8,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - `hugo` — build site to `public/`
 - `bash add-slides.sh` — import new images from `input/<subfolder>/` into the gallery
 
-Hugo extended v0.152.2 is required (used in CI).
+Hugo extended v0.164.0 is required (used in CI).
 
 ## Architecture
 

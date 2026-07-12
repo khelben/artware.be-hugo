@@ -5,13 +5,13 @@ title = 'ARTware - Keramiek - Lieve De Schutter'
 
 [languages]
   [languages.nl]
-    languageCode = 'nl-be'
-    languageName = 'Nederlands'
+    locale = 'nl-be'
+    label = 'Nederlands'
     title = 'ARTware - Keramiek - Lieve De Schutter'
     weight = 1
   [languages.en]
-    languageCode = 'en'
-    languageName = 'English'
+    locale = 'en'
+    label = 'English'
     title = 'ARTware - Ceramics - Lieve De Schutter'
     weight = 2
 
