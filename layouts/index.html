@@ -108,7 +108,7 @@
                 <h2 class="section-title">{{ i18n "gallery_title_witte_klei" }}</h2>
             </div>
             <div class="pswp-gallery gallery-carousel" id="gallery-grid">
-                {{ range resources.Match "images/gallery/witteklei/slide*.jpg" }}
+                {{ range collections.Reverse (resources.Match "images/gallery/witteklei/slide*.jpg") }}
                     {{ $thumb := .Resize "400x" }}
                     <a href="{{ .RelPermalink }}"
                        data-pswp-width="{{ .Width }}"
@@ -124,7 +124,7 @@
                 <h2 class="section-title">{{ i18n "gallery_title_grijze_klei" }}</h2>
             </div>
             <div class="pswp-gallery gallery-carousel" id="gallery-grid-gray">
-                {{ range resources.Match "images/gallery/grijzeklei/slide*.jpg" }}
+                {{ range collections.Reverse (resources.Match "images/gallery/grijzeklei/slide*.jpg") }}
                     {{ $thumb := .Resize "400x" }}
                     <a href="{{ .RelPermalink }}"
                        data-pswp-width="{{ .Width }}"
@@ -140,7 +140,7 @@
                 <h2 class="section-title">{{ i18n "gallery_title_zwarte_klei" }}</h2>
             </div>
             <div class="pswp-gallery gallery-carousel" id="gallery-grid-black">
-                {{ range resources.Match "images/gallery/zwarteklei/slide*.jpg" }}
+                {{ range collections.Reverse (resources.Match "images/gallery/zwarteklei/slide*.jpg") }}
                     {{ $thumb := .Resize "400x" }}
                     <a href="{{ .RelPermalink }}"
                        data-pswp-width="{{ .Width }}"
@@ -156,7 +156,7 @@
                 <h2 class="section-title">{{ i18n "gallery_title_rode_klei" }}</h2>
             </div>
             <div class="pswp-gallery gallery-carousel" id="gallery-grid-red">
-                {{ range resources.Match "images/gallery/rodeklei/slide*.jpg" }}
+                {{ range collections.Reverse (resources.Match "images/gallery/rodeklei/slide*.jpg") }}
                     {{ $thumb := .Resize "400x" }}
                     <a href="{{ .RelPermalink }}"
                        data-pswp-width="{{ .Width }}"
